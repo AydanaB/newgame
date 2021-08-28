@@ -27,7 +27,6 @@ public class Main {
         }
         heroesHit();
         printStatistics();
-        medicTreat();
     }
 
     public static void changeDefenceType() {
@@ -36,15 +35,22 @@ public class Main {
         bossDefenceType = heroesAttackType[randomIndex];
         System.out.println("Boss choose: " + bossDefenceType);
     }
-
+    
     public static void printStatistics() {
         System.out.println("_________________________");
         System.out.println("Round: " + roundCounter);
         roundCounter++;
-        System.out.println("Boss health: " + bossHealth);
-        for (int i = 0; i < heroesHealth.length; i++) {
-            System.out.println(heroesAttackType[i] + " Health: " + heroesHealth[i]);
-        }
+        System.out.println("Boss Health: " + bossHealth);
+        int min = heroesHealth[0];
+            for (int i : heroesHealth) {
+                if (i < min){
+                min = i;
+                if (min > 0 && min < 100){
+                    min = min + 100;
+                }
+            }
+                System.out.println("Heroes Health: " + min);
+            }
         System.out.println("Medic Health: " + medicHealth);
         System.out.println("_________________________");
     }
@@ -83,18 +89,6 @@ public class Main {
                 } else {
                     bossHealth = bossHealth - heroesDamage[i];
                 }
-            }
-        }
-    }
-
-    public static void medicTreat() {
-        boolean firstDeathDoor = false;
-        for (int i = 0; i < heroesHealth.length; i++) {
-            if (heroesHealth[i] < 100 && heroesHealth[i] > 0) {
-                firstDeathDoor = true;
-            }
-            if (firstDeathDoor && medicHealth > 0){
-                heroesHealth[i] = heroesHealth[i] + 100;
             }
         }
     }
